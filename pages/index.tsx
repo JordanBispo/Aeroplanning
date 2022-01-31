@@ -1,8 +1,15 @@
 import type { NextPage } from 'next'
 import Head from 'next/head'
+import io from 'socket.io-client'
 import { useState } from 'react'
 import Card from '../components/card'
 import styles from '../styles/Home.module.css'
+
+//implement socket connection
+
+const socket = io('http://0.0.0.0:3333')
+
+
 
 const Home: NextPage = () => {
 
@@ -13,6 +20,37 @@ const Home: NextPage = () => {
     value: number,
     image?: string
   }
+
+  const [showDown, setShowDown] = useState<boolean>(false)
+  const [userList, setUserList] = useState<any[]>([])
+
+  socket.on('newUser', (data: any) => {
+    setUserList(userList.concat([data]))
+  })
+
+  // socket emmit function
+  const setValue = (value: number) => {
+    socket.emit('setValue', { name: "teste", value: value })
+  }
+
+  socket.on("changeValue", (data: any) => {
+    setUserList(userList.map(u => {
+      if (u.name === data.name) {
+        return data
+      } else {
+        return u
+      }
+    }))
+    const awaitUser = userList.findIndex(u => {
+      u.value === 0
+    })
+    if (awaitUser === -1) setShowDown(true)
+  })
+
+  const conect = () => {
+    socket.emit("connectUser", { name: "UserTest", value: 3 })
+  }
+
 
   const card_list: card[] = [{
     title: "Tenda",
@@ -45,11 +83,20 @@ const Home: NextPage = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <header className={styles.title} style={!!activated ? { backgroundColor: "#00974c", color: "#fff" } : undefined} onClick={() => { active(0) }} >
+      <div className={styles.sidebar_container} >
+        {userList.map((user, i) => {
+          return <div className={styles.sidebar_item} key={i}>
+            <label className={styles.sidebar_text} >{user.name}</label>
+            <label className={styles.sidebar_points} style={user.value !== 0 ? { color: '#FFE033' } : undefined} >{user.value !== 0 ? "ready" : "await"}</label>
+            {user.value === 0 && <span className={styles.loading}></span>}
+          </div>
+        })}
+      </div>
+
+      <header className={styles.title} style={!!activated ? { backgroundColor: "#00974c", color: "#fff" } : undefined} onClick={() => { active(0); conect() }} >
         {!!activated ? "Back to Home" : "Select one card"}
       </header>
       <main className={styles.main}>
-
         {!activated && card_list.map((c, i) => {
           return <Card card={c} key={i} clickCallback={() => { active(card_list[i].value) }} />
         })}
@@ -69,5 +116,7 @@ const Home: NextPage = () => {
     </div>
   )
 }
+
+
 
 export default Home
