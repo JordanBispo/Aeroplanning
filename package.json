@@ -1,0 +1,29 @@
+{
+  "name": "next-ts",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
+  "dependencies": {
+    "express": "^4.17.2",
+    "ioredis": "^4.28.3",
+    "next": "12.0.9",
+    "promise-redis": "^0.0.5",
+    "react": "17.0.2",
+    "react-dom": "17.0.2",
+    "socket.io": "^4.4.1",
+    "socket.io-client": "^4.4.1",
+    "swr": "^1.2.0"
+  },
+  "devDependencies": {
+    "@types/node": "17.0.13",
+    "@types/react": "17.0.38",
+    "eslint": "7.32.0",
+    "eslint-config-next": "12.0.9",
+    "typescript": "4.5.5"
+  }
+}

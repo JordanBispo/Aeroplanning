@@ -1,0 +1,97 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #eaeaea;
+}
+
+.main {
+  min-height: 100vh;
+  padding: 4rem 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  max-width: 600px;
+}
+
+.title {
+  color: #000;
+  position: absolute;
+  left: 50%;
+  top: 4%;
+  transform: translateX(-50%);
+  background-color: #00f37a;
+  width: 40vw;
+  padding: 7px;
+  font-family: 'Times New Roman', Times, serif;
+  font-weight: bolder;
+  border-radius: 10px;
+  text-align: center;
+}
+
+.card {
+  margin: 1rem;
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  color: inherit;
+  justify-content: space-between;
+  align-items: center;
+  text-decoration: none;
+  border: 1px solid #fff;
+  border-radius: 10px;
+  transition: color 0.15s ease, border-color 0.15s ease;
+  height: 350px;
+  width: 250px;
+}
+
+.selected_card {
+  margin: 1rem;
+  padding-top: 2.5rem;
+  display: flex;
+  flex-direction: column;
+  color: #fff;
+  background-color: #00f37a;
+  justify-content: space-between;
+  align-items: center;
+  text-decoration: none;
+  border: 1px solid #fff;
+  border-radius: 10px;
+  box-shadow: 0 0 2px 5px #97ffcb,
+              0 0 25px 5px #00f37a;
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  font-size: 15em;
+  text-align: center;
+  text-shadow: 2px 5px #04b35b;
+  transition: color 0.15s ease, border-color 0.15s ease;
+  height: 350px;
+  width: 250px;
+}
+
+.card:hover,
+.card:focus,
+.card:active {
+  color: #04b35b;
+  border-color: #00f37a;
+  border-width: 2px;
+  box-shadow: 5px 5px 3px 0px #00f37a;
+}
+
+.card h2 {
+  margin: 0 0 1rem 0;
+  font-size: 1.5rem;
+}
+
+.logo {
+  height: 1em;
+  margin-left: 0.5rem;
+}
+
+@media screen   {
+  .card {
+    max-width: 130px;
+    max-height: 250px;
+    text-align: center;
+  }
+}
